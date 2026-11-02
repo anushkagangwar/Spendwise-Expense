@@ -1,0 +1,155 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #F7F8F6;
+  color: #202831;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  background: #DDF3E9;
+  color: #087A5D;
+}
+
+/* =========================
+   SPENDWISE DARK THEME
+========================= */
+
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+:root[data-theme="dark"] body {
+  background: #151d25;
+  color: #f1f5f3;
+}
+
+/* Main content */
+:root[data-theme="dark"] .main-content,
+:root[data-theme="dark"] .page-content {
+  background: #151d25;
+  color: #f1f5f3;
+}
+
+/* Cards */
+:root[data-theme="dark"] .settings-card,
+:root[data-theme="dark"] .settings-logout-card,
+:root[data-theme="dark"] .dashboard-card,
+:root[data-theme="dark"] .stat-card,
+:root[data-theme="dark"] .transaction-card,
+:root[data-theme="dark"] .budget-card,
+:root[data-theme="dark"] .goal-card {
+  background: #202c36;
+  border-color: #34434d;
+  color: #f1f5f3;
+}
+
+/* Headings and text */
+:root[data-theme="dark"] .settings-page h1,
+:root[data-theme="dark"] .settings-page h2,
+:root[data-theme="dark"] .settings-page h3,
+:root[data-theme="dark"] .settings-page label {
+  color: #f1f5f3;
+}
+
+:root[data-theme="dark"] .settings-page p {
+  color: #aab7b1;
+}
+
+/* Inputs and dropdowns */
+:root[data-theme="dark"] .settings-input-wrapper,
+:root[data-theme="dark"] .settings-select-wrapper,
+:root[data-theme="dark"] .settings-input-wrapper input,
+:root[data-theme="dark"] .settings-select-wrapper select {
+  background: #26343e;
+  color: #f1f5f3;
+  border-color: #40515b;
+}
+
+/* Notification separators */
+:root[data-theme="dark"] .settings-option {
+  border-color: #34434d;
+}
+
+/* Security */
+:root[data-theme="dark"] .security-info {
+  background: #26343e;
+}
+
+:root[data-theme="dark"] .settings-logout-card {
+  background: #30272a;
+  border-color: #654044;
+}
+
+/* Tables */
+:root[data-theme="dark"] table,
+:root[data-theme="dark"] th,
+:root[data-theme="dark"] td {
+  border-color: #34434d;
+}
+
+:root[data-theme="dark"] th {
+  background: #26343e;
+  color: #f1f5f3;
+}
+
+:root[data-theme="dark"] td {
+  color: #dce5e0;
+}
+
+/* Modal */
+:root[data-theme="dark"] .modal,
+:root[data-theme="dark"] .modal-content,
+:root[data-theme="dark"] .transaction-modal {
+  background: #202c36;
+  color: #f1f5f3;
+}
+
+/* Smooth theme transition */
+body,
+.settings-card,
+.settings-option,
+.settings-input-wrapper,
+.settings-select-wrapper {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
