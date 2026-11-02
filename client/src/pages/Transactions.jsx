@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 
-
 import {
   Plus,
   Search,
@@ -19,12 +18,19 @@ import {
 
 import "../styles/transactions.css";
 
-const API_URL = "https://spendwise-expense-31h4.onrender.com/api/transactions";
+// API URLs
+const API_URL =
+  "https://spendwise-expense-31h4.onrender.com/api/transactions";
 
+const BUDGET_API_URL =
+  "https://spendwise-expense-31h4.onrender.com/api/budgets";
+
+// Authentication token
 const getToken = () =>
   localStorage.getItem("spendwiseAuthToken") ||
   sessionStorage.getItem("spendwiseAuthToken");
 
+// Common authentication headers
 const getAuthHeaders = () => ({
   "Content-Type": "application/json",
   Authorization: `Bearer ${getToken()}`,
@@ -58,6 +64,23 @@ function Transactions() {
   // Transaction form
   const [formData, setFormData] = useState(initialForm);
 
+  // Safely parse API response
+  const parseResponse = async (response) => {
+    const contentType = response.headers.get("content-type") || "";
+
+    if (!contentType.includes("application/json")) {
+      const responseText = await response.text();
+
+      console.error("Non-JSON API response:", responseText);
+
+      throw new Error(
+        `Server returned an invalid response (HTTP ${response.status}). Please check the API endpoint.`
+      );
+    }
+
+    return response.json();
+  };
+
   // Fetch transactions from MongoDB
   const fetchTransactions = async () => {
     try {
@@ -70,12 +93,12 @@ function Transactions() {
         throw new Error("Please login again to view transactions.");
       }
 
-      const response = await fetch(`${API_URL}/transactions`, {
+      const response = await fetch(API_URL, {
         method: "GET",
         headers: getAuthHeaders(),
       });
 
-      const data = await response.json();
+      const data = await parseResponse(response);
 
       if (!response.ok) {
         throw new Error(
@@ -97,7 +120,7 @@ function Transactions() {
       setTransactions(formattedTransactions);
     } catch (error) {
       console.error("Fetch transactions error:", error);
-      setApiError(error.message);
+      setApiError(error.message || "Unable to load transactions.");
     } finally {
       setLoading(false);
     }
@@ -219,13 +242,13 @@ function Transactions() {
         throw new Error("Session expired. Please login again.");
       }
 
-      // Fetch budgets from MongoDB
-      const response = await fetch(`${API_URL}/budgets`, {
+      // Fetch budgets from correct backend endpoint
+      const response = await fetch(BUDGET_API_URL, {
         method: "GET",
         headers: getAuthHeaders(),
       });
 
-      const data = await response.json();
+      const data = await parseResponse(response);
 
       if (!response.ok) {
         throw new Error(
@@ -253,7 +276,7 @@ function Transactions() {
       }
 
       // Calculate already spent amount
-      // Exclude the current transaction while editing
+      // Exclude current transaction while editing
       const alreadySpent = transactions
         .filter((item) => {
           const isSameCategory =
@@ -313,7 +336,7 @@ function Transactions() {
     }
   };
 
-  // Add or update transaction using backend API
+  // Add or update transaction
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -364,8 +387,8 @@ function Transactions() {
 
       const response = await fetch(
         isEditing
-          ? `${API_URL}/transactions/${editingId}`
-          : `${API_URL}/transactions`,
+          ? `${API_URL}/${editingId}`
+          : API_URL,
         {
           method: isEditing ? "PUT" : "POST",
           headers: getAuthHeaders(),
@@ -373,7 +396,7 @@ function Transactions() {
         }
       );
 
-      const data = await response.json();
+      const data = await parseResponse(response);
 
       if (!response.ok) {
         throw new Error(
@@ -387,13 +410,13 @@ function Transactions() {
       closeModal();
     } catch (error) {
       console.error("Save transaction error:", error);
-      setApiError(error.message);
+      setApiError(error.message || "Unable to save transaction.");
     } finally {
       setSaving(false);
     }
   };
 
-  // Delete transaction using backend API
+  // Delete transaction
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this transaction?"
@@ -405,14 +428,14 @@ function Transactions() {
       setApiError("");
 
       const response = await fetch(
-        `${API_URL}/transactions/${id}`,
+        `${API_URL}/${id}`,
         {
           method: "DELETE",
           headers: getAuthHeaders(),
         }
       );
 
-      const data = await response.json();
+      const data = await parseResponse(response);
 
       if (!response.ok) {
         throw new Error(
@@ -427,7 +450,7 @@ function Transactions() {
       setMenuOpen(null);
     } catch (error) {
       console.error("Delete transaction error:", error);
-      setApiError(error.message);
+      setApiError(error.message || "Unable to delete transaction.");
     }
   };
 
