@@ -32,7 +32,7 @@ function Login() {
       setIsLoading(true);
       setError("");
 
-     const response = await fetch("https://spendwise-expense-31h4.onrender.com/api/auth/register", {
+     const response = await fetch("https://spendwise-expense-31h4.onrender.com/api/auth/login", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
