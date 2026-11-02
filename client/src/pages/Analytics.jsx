@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import API_URL from "../services/api";
+
 
 import {
   ResponsiveContainer,
@@ -29,7 +29,7 @@ import {
 
 import "../styles/analytics.css";
 
-const API_URL = fetch(`${API_URL}/api/transactions`);
+const API_URL = "https://spendwise-expense-31h4.onrender.com/api/transactions";
 
 const COLORS = [
   "#10A37F",

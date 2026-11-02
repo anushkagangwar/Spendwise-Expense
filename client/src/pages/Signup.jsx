@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import API_URL from "../services/api";
+
 import {
   CircleDollarSign,
   UserRound,
@@ -64,12 +64,12 @@ function Signup() {
       setError("");
 
       const response = await fetch(
-  `${import.meta.env.VITE_API_URL}/api/auth/register`,
+  "https://spendwise-expense-31h4.onrender.com/api/auth/register",
   {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
           body: JSON.stringify({
             name: formData.name.trim(),
             email: formData.email.trim().toLowerCase(),

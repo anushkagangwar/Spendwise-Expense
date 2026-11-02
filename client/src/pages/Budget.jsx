@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import API_URL from "../services/api";
+
 
 import {
   Plus,
@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import "../styles/budget.css";
 
- const API_URL = `${import.meta.env.VITE_API_URL}/api`;
+const API_URL = "https://spendwise-expense-31h4.onrender.com/api";
 
 const iconMap = {
   food: Utensils,

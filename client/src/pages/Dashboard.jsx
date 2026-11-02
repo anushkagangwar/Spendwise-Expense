@@ -1,7 +1,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import API_URL from "../services/api";
+
 
 import {
   Plus,
@@ -16,8 +16,7 @@ import {
 } from "lucide-react";
 
 import "../styles/dashboard.css";
-
-const API_URL = `${import.meta.env.VITE_API_URL}/api`;
+const API_URL = "https://spendwise-expense-31h4.onrender.com/api";
 
 const getToken = () =>
   localStorage.getItem("spendwiseAuthToken") ||

@@ -32,11 +32,11 @@ function Login() {
       setIsLoading(true);
       setError("");
 
-      const response = await fetch(`${API_URL}/api/auth/register`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+     const response = await fetch("https://spendwise-expense-31h4.onrender.com/api/auth/register", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
           body: JSON.stringify({
             email: email.trim().toLowerCase(),
             password
