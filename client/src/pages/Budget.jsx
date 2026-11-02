@@ -1,5 +1,7 @@
 
 import { useEffect, useState } from "react";
+import API_URL from "../services/api";
+
 import {
   Plus,
   Wallet,
@@ -17,7 +19,7 @@ import {
 } from "lucide-react";
 import "../styles/budget.css";
 
-const API_URL = "http://localhost:5000/api";
+ const API_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 const iconMap = {
   food: Utensils,

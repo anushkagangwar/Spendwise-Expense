@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import API_URL from "../services/api";
 import {
   Plus,
   Target,
@@ -16,7 +17,7 @@ import {
 
 import "../styles/SavingsGoals.css";
 
-const API_URL = "http://localhost:5000/api/savings-goals";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/savings-goals`;
 
 const blank = {
   name: "",

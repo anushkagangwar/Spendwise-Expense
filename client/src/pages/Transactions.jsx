@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import API_URL from "../services/api";
 
 import {
   Plus,
@@ -18,7 +19,7 @@ import {
 
 import "../styles/transactions.css";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = fetch(`${API_URL}/api/transactions`);
 
 const getToken = () =>
   localStorage.getItem("spendwiseAuthToken") ||
